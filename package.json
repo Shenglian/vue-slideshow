@@ -1,0 +1,23 @@
+{
+  "name": "vue-slideshow",
+  "version": "1.0.0",
+  "description": "slideshow of Vuejs",
+  "author": "Sheng",
+  "main": "vue-slideshow.vue",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shenglian/vue-slideshow.git"
+  },
+  "keywords": [
+    "vue",
+    "vue-slideshow"
+  ],
+  "homepage": "https://github.com/Shenglian/vue-slideshow",
+  "bugs": {
+    "url": "https://github.com/Shenglian/vue-slideshow/issues"
+  },
+  "license": "MIT"
+}
