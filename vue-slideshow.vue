@@ -26,6 +26,7 @@
 
 <script>
   export default {
+    name: 'slideshow',
     props: {
       options: {
         type: Object,
