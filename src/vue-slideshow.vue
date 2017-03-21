@@ -28,21 +28,19 @@
   export default {
     name: 'slideshow',
     props: {
-      options: {
-        type: Object,
-      },
       imgs: {
         type: Array,
         required: true,
-        default() {
-          return [];
-        },
+        default() { return []; },
+      },
+      seconds: {
+        type: Number,
+        default() { return 5000; },
       },
     },
     data() {
       return {
         currentIndex: 0,
-        autoplay: 5000,
         paginations: [],
         timer: null,
       };
@@ -58,13 +56,13 @@
       init() {
         this.$el.style.display = 'block';
         this.slides = this.$el.querySelectorAll('#slides .slide');
-        this.timer = setInterval(this.nextSlideshow, this.autoplay);
+        this.timer = setInterval(this.nextSlideshow, this.seconds);
       },
       pauseSlideshow() {
         clearInterval(this.timer);
       },
       playSlideshow() {
-        this.timer = setInterval(this.nextSlideshow, this.autoplay);
+        this.timer = setInterval(this.nextSlideshow, this.seconds);
       },
       previousSlideshow() {
         this.goToSlide(this.currentIndex - 1);
@@ -92,7 +90,7 @@ $arrowsZIndex: 4;
   display: none;
   position: relative;
   height: auto;
-  
+
   * {
     box-sizing: border-box;
   }

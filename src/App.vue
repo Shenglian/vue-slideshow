@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <Slideshow
-      :imgs="swiperSlides"
-      :options="slideshowOptions">
+      :imgs="imgs">
     </Slideshow>
   </div>
 </template>
@@ -17,8 +16,7 @@ export default {
   },
   data() {
     return {
-      slideshowOptions: {},
-      swiperSlides: [
+      imgs: [
         {
           url: 'https://source.unsplash.com/category/buildings/1600x900',
           href: '/',
