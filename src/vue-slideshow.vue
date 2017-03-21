@@ -91,6 +91,11 @@ $arrowsZIndex: 4;
 .slideshow {
   display: none;
   position: relative;
+  height: auto;
+  
+  * {
+    box-sizing: border-box;
+  }
 }
 
 #slides {

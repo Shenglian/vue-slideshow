@@ -17,6 +17,7 @@ export default {
   },
   data() {
     return {
+      slideshowOptions: {},
       swiperSlides: [
         {
           url: 'https://source.unsplash.com/category/buildings/1600x900',
