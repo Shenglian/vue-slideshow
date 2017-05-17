@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Slideshow
-      :imgs="imgs">
+      :sources="sources"
+      :names="names">
     </Slideshow>
   </div>
 </template>
@@ -16,22 +17,27 @@ export default {
   },
   data() {
     return {
-      imgs: [
+      names: 'sss',
+      sources: [
         {
-          url: 'https://source.unsplash.com/category/buildings/1600x900',
-          href: '/',
+          src: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          type: 'video/mp4',
         },
         {
-          url: 'https://source.unsplash.com/category/food/1600x900',
+          src: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          type: 'video/mp4',
         },
         {
-          url: 'https://source.unsplash.com/category/nature/1600x900',
+          src: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          type: 'video/mp4',
         },
         {
-          url: 'https://source.unsplash.com/category/people/1600x900',
+          src: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          type: 'video/mp4',
         },
         {
-          url: 'https://source.unsplash.com/category/technology/1600x900',
+          src: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          type: 'video/mp4',
         },
       ],
     };

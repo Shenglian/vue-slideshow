@@ -4,11 +4,15 @@
       @mouseleave="playSlideshow" 
     >
         <div id="slides">
-            <a v-for="(img, index) in imgs" 
+            <a v-for="(source, index) in sources"
               class="slide" 
               :class="{ 'active': currentSlide(index) }" 
-              :style="{ 'background-image': `url(${img.url})` }" 
-              :href="img.href">Slide {{ index }}</a>
+              :href="source.href">Slide {{ index }}
+              <video 
+                name="media" controls>
+                <source :src="source.src" :type="source.type">
+              </video>
+            </a>
         </div>
 
         <div class="paginations">
@@ -28,7 +32,8 @@
   export default {
     name: 'slideshow',
     props: {
-      imgs: {
+      names: '',
+      sources: {
         type: Array,
         required: true,
         default() { return []; },
@@ -47,7 +52,7 @@
     },
     mounted() {
       this.init();
-      this.paginations = this.imgs.length;
+      this.paginations = this.sources.length;
     },
     methods: {
       currentSlide(val) {
