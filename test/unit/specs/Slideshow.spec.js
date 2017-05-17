@@ -1,4 +1,4 @@
-import Vue from 'vue';
+// import Vue from 'vue';
 import SlideShow from '../../../src/vue-slideshow';
 
 describe('SlideShow - Info', () => {
@@ -7,12 +7,12 @@ describe('SlideShow - Info', () => {
   });
 });
 
-describe('SlideShow - Data', () => {
-
+describe('SlideShow - Data', () => { 
   const defaultData = SlideShow.data();
 
-  it('init data === function', () => {
+  it('init data === function', (done) => {
     expect(typeof SlideShow.data).to.equal('function');
+    done();
   });
 
   it('currentIndex === 0', () => {
