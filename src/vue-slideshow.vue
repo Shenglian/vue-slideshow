@@ -1,29 +1,28 @@
 <template>
-    <div class="slideshow" 
-      @mouseover="pauseSlideshow"
-      @mouseleave="playSlideshow" 
-    >
-        <div id="slides">
-            <a v-for="(source, index) in sources"
-              class="slide" 
-              :class="{ 'active': currentSlide(index) }" 
-              :href="source.href">Slide {{ index }}
-              <video 
-                name="media" controls>
+    <div class="slideshow">
+      <div id="slides">
+        <a class="slide" :class="{ 'active': currentSlide(index, source) }"
+          target="_blank"
+          v-for="(source, index) in sources" 
+          :href="source.url">
+            <h4> {{source.title}} </h4>
+            <div class="cover">
+              <video name="media" controls playsinline muted controls>
                 <source :src="source.src" :type="source.type">
               </video>
-            </a>
-        </div>
+            </div>
+        </a>  
+      </div>
 
-        <div class="paginations">
-          <div v-for="(p, index) in paginations" 
-            class="pagination"
-            :class="{ 'active': currentSlide(index) }"
-            @click="goToSlide(index)"></div>
-        </div>
-        
-        <div class="prev" @click="previousSlideshow"> < </div>
-        <div class="next" @click="nextSlideshow"> > </div>
+      <div v-if="paginations.length > 1" class="paginations">
+        <div v-for="(p, index) in paginations" 
+          class="pagination"
+          :class="{ 'active': currentSlide(index) }"
+          @click="goToSlide(index)"></div>
+      </div>
+      
+      <div v-if="paginations.length > 1" class="prev" @click="previousSlideshow"> < </div>
+      <div v-if="paginations.length > 1" class="next" @click="nextSlideshow"> > </div>
           
     </div>
 </template>
@@ -37,10 +36,6 @@
         type: Array,
         required: true,
         default() { return []; },
-      },
-      seconds: {
-        type: Number,
-        default() { return 5000; },
       },
     },
     data() {
@@ -61,14 +56,20 @@
       init() {
         this.$el.style.display = 'block';
         this.slides = this.$el.querySelectorAll('#slides .slide');
-        this.timer = setInterval(this.nextSlideshow, this.seconds);
+        this.videos = this.$el.querySelectorAll('#slides .slide video');
+
+        // First Videos play
+        this.videos[0].play();
+
+        // add eventListeners
+        this.videos.forEach((s) => {
+          // hide control
+          s.controls = false;
+          // add end event
+          s.addEventListener('ended', this.nextSlideshow, false);
+        });
       },
-      pauseSlideshow() {
-        clearInterval(this.timer);
-      },
-      playSlideshow() {
-        this.timer = setInterval(this.nextSlideshow, this.seconds);
-      },
+
       previousSlideshow() {
         this.goToSlide(this.currentIndex - 1);
       },
@@ -78,6 +79,12 @@
       goToSlide(n = 0) {
         // 1 % 5 = 1, 2 % 5 = 2, 3 % 5 = 3, 4 % 5 = 4, and 5 % 5 = 0
         this.currentIndex = (this.slides.length + n) % this.slides.length;
+
+        this.$el.querySelectorAll('video').forEach((v) => {
+          v.pause();
+        });
+
+        this.$el.querySelectorAll('video')[this.currentIndex].play();
       },
     },
   };
@@ -95,45 +102,64 @@ $arrowsZIndex: 4;
   display: none;
   position: relative;
   height: auto;
-
   * {
     box-sizing: border-box;
   }
 }
 
 #slides {
-    position: relative;
-    height: 300px;
-    padding: 0px;
-    margin: 0px;
-    list-style-type: none;
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+  height: 500px;
+  list-style-type: none;
 }
 
 .slide {
-    opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #000;
+  transition: opacity 1s ease-out;
+  z-index: $slidesZIndex;
+  color: #fff;
+
+  &.active {
+    opacity: 1;
+    z-index: 3;
+  }
+  h4 {
     position: absolute;
-    left: 0;
-    top: 0;
-    padding: 40px;
-    width: 100%;
-    height: 100%;
-
-    background-color: #333;
-    background-size: cover;
-
-    transition: opacity 1s ease-out;
-
-    cursor: pointer;
-
-    z-index: $slidesZIndex;
-    &.active {
-        opacity: 1;
-    }
+    left: 20px;
+    bottom: 20px;
+  }
 }
 
-.slide {
-    color: #fff;
-    font-size: 40px;
+.slide .cover {
+  position: relative;
+  margin: auto;
+  height: auto;
+  border-radius: 50%;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 0 300px 100px rgba(0, 0, 0, 1) inset;
+  }
+}
+
+.slide video {
+  width: auto;
+  height: 500px;
 }
 
 .prev,
@@ -169,14 +195,14 @@ $arrowsZIndex: 4;
     width: 10px;
     height: 10px;
     border-radius: 100%;
-    border: 1px solid #333;
-    background-color: #333;
+    border: 1px solid #e89022;
+    background-color: #e89022;
 
     cursor: pointer;
     transition: all, .3s;
     &:hover {
-      border: 1px solid #999999;
-      background-color: #999999;
+      border: 1px solid #fff;
+      background-color: #fff;
     }
     &.active {
       background-color: #fff;
