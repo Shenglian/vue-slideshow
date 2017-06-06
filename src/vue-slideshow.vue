@@ -98,7 +98,7 @@ $arrowsZIndex: 4;
 
 #slides {
     position: relative;
-    height: 300px;
+    height: 400px;
     padding: 0px;
     margin: 0px;
     list-style-type: none;
