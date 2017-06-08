@@ -18,20 +18,20 @@ export default {
     return {
       imgs: [
         {
-          url: 'https://source.unsplash.com/category/buildings/1600x900',
+          url: 'https://source.unsplash.com/category/buildings/1200x400',
           href: '/',
         },
         {
-          url: 'https://source.unsplash.com/category/food/1600x900',
+          url: 'https://source.unsplash.com/category/food/1200x400',
         },
         {
-          url: 'https://source.unsplash.com/category/nature/1600x900',
+          url: 'https://source.unsplash.com/category/nature/1200x400',
         },
         {
-          url: 'https://source.unsplash.com/category/people/1600x900',
+          url: 'https://source.unsplash.com/category/people/1200x400',
         },
         {
-          url: 'https://source.unsplash.com/category/technology/1600x900',
+          url: 'https://source.unsplash.com/category/technology/1200x400',
         },
       ],
     };
