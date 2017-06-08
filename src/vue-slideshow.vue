@@ -12,6 +12,25 @@
               <div class="slide_content__title">{{ img.name }}</div>
               <div class="slide_content__word">{{ img.word }}<span>曝光數</span></div>
               <div class="slide_content__meta"> {{ `${img.client} ${img.category}` }} </div>
+              <div class="slide_content__action">
+                <svg width="82px" height="68px" viewBox="0 0 82 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g id="desktop_visual" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g id="HOME_normal" transform="translate(-472.000000, -265.000000)">
+                          <g id="oneAD-pick" transform="translate(0.000000, 50.000000)">
+                              <g id="central" transform="translate(338.000000, 215.000000)">
+                                  <g id="play-logo" transform="translate(134.000000, 0.000000)">
+                                      <g id="Rectangle-2">
+                                          <use fill-opacity="0.2" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                          <rect stroke="#2675B6" stroke-width="13" x="6.5" y="6.5" width="69" height="55" rx="12"></rect>
+                                      </g>
+                                      <path d="M41.7676401,22.639014 C42.8827162,20.7265473 44.6656542,20.7319133 45.7587865,22.6666504 L57.6354243,43.6871364 C58.4508153,45.1302986 57.7737736,46.3002128 56.1118531,46.3002128 L30.9717919,46.3002128 C29.3149558,46.3002128 28.6513686,45.1347273 29.4810541,43.7117339 L41.7676401,22.639014 Z" id="Triangle" fill="#e89022" transform="translate(43.541822, 33.755159) rotate(90.000000) translate(-43.541822, -33.755159) "></path>
+                                  </g>
+                              </g>
+                          </g>
+                      </g>
+                  </g>
+                </svg>
+              </div>
             </div>
             <img :src="img.url" alt="">
           </a>
@@ -188,6 +207,13 @@ $arrowsZIndex: 11;
       }
     }
     &__meta { font-size: 18px; }
+    &__action {
+      margin-top: 10px;
+      svg { 
+        margin-right: -15px;
+        transform: scale(0.7); 
+      }
+    }
   }
 
   img {
