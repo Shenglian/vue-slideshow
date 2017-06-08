@@ -8,6 +8,11 @@
           class="slide" 
           :class="{ 'active': currentSlide(index) }" 
           :href="img.href">
+            <div class="slide_content">
+              <div class="slide_content__title">{{ img.name }}</div>
+              <div class="slide_content__word">{{ img.word }}<span>曝光數</span></div>
+              <div class="slide_content__meta"> {{ `${img.client} ${img.category}` }} </div>
+            </div>
             <img :src="img.url" alt="">
           </a>
       </div>
@@ -94,8 +99,6 @@ $shadowZIndex: 4;
 $paginationsZIndex: 10;
 $arrowsZIndex: 11;
 
-// if javascript is available，
-// it will replace none to block;
 .slideshow {
   display: none;
   position: relative;
@@ -110,27 +113,10 @@ $arrowsZIndex: 11;
   padding: 0px;
   margin: 0px;
   list-style-type: none;
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 50%;
-    bottom: 0;
-    background: -webkit-linear-gradient(left,#000 0,#000 40%,transparent 100%);
-    background: linear-gradient(to right,#000 0,#000 40%,transparent 100%);
+
+  &:hover img {
+    transform: scale(1.05, 1.05);
   }
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    right: 0;
-    bottom: 0;
-    background: -webkit-linear-gradient(right,#000 0,#000 40%,transparent 100%);
-    background: linear-gradient(to left,#000 0,#000 40%,transparent 100%);
-  }
-  &:before, &:after { z-index: $shadowZIndex; }
 }
 
 .slide {
@@ -151,14 +137,10 @@ $arrowsZIndex: 11;
 
   cursor: pointer;
   z-index: $slidesZIndex;
-  
+
   &.active {
     opacity: 1;
     z-index: $activeZIndex;
-  }
-
-  &:hover img {
-    transform: scale(1.05, 1.05);
   }
 
   &:after {
@@ -166,21 +148,53 @@ $arrowsZIndex: 11;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    right: 75%;
+    bottom: 0;
+    background: -webkit-linear-gradient(left,#000 0,#000 40%,transparent 100%);
+    background: linear-gradient(to right,#000 0,#000 40%,transparent 100%);
   }
-  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 35%;
+    right: 0;
+    bottom: 0;
+    background: -webkit-linear-gradient(right,#000 0,#000 50%,transparent 100%);
+    background: linear-gradient(to left,#000 0,#000 50%,transparent 100%);
+    z-index: 1;
+  }
 }
 
 .slide {
   display: flex;
   justify-content: center;
   align-items: center;
+  .slide_content {
+    position: absolute;
+    top: 50%;
+    left: 7rem;
+    right: 7rem;
+    text-align: right;
+    transform: translate(0, -50%);
+    z-index: 1;
+    font-weight: 100;
+    &__title { font-size: 32px; }
+    &__word { 
+      font-size: 55px; 
+      span {
+        margin-left: 30px;
+        font-size: 18px;
+      }
+    }
+    &__meta { font-size: 18px; }
+  }
+
   img {
     position: relative;
+    right: 12%;
     height: 100%;
     transition: all, .8s;
-    
   }
 }
 
@@ -196,7 +210,7 @@ $arrowsZIndex: 11;
   width: 50px;
   height: 50px;
 
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(2);
   z-index: $arrowsZIndex;
   cursor: pointer;
   svg { transition: all, .3s; }
