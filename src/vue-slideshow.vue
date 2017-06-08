@@ -3,24 +3,32 @@
       @mouseover="pauseSlideshow"
       @mouseleave="playSlideshow" 
     >
-        <div id="slides">
-            <a v-for="(img, index) in imgs" 
-              class="slide" 
-              :class="{ 'active': currentSlide(index) }" 
-              :style="{ 'background-image': `url(${img.url})` }" 
-              :href="img.href">Slide {{ index }}</a>
-        </div>
+      <div id="slides">
+        <a v-for="(img, index) in imgs" 
+          class="slide" 
+          :class="{ 'active': currentSlide(index) }" 
+          :href="img.href">
+            <img :src="img.url" alt="">
+          </a>
+      </div>
 
-        <div class="paginations">
-          <div v-for="(p, index) in paginations" 
-            class="pagination"
-            :class="{ 'active': currentSlide(index) }"
-            @click="goToSlide(index)"></div>
-        </div>
-        
-        <div class="prev" @click="previousSlideshow"> < </div>
-        <div class="next" @click="nextSlideshow"> > </div>
-          
+      <div class="paginations">
+        <div v-for="(p, index) in paginations" 
+          class="pagination"
+          :class="{ 'active': currentSlide(index) }"
+          @click="goToSlide(index)"></div>
+      </div>
+      
+      <div class="prev" @click="previousSlideshow"> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </div>
+      <div class="next" @click="nextSlideshow"> 
+        <svg xmlns="http://www.w3.org/2ffffff/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </div>
     </div>
 </template>
 
@@ -78,11 +86,12 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 $slidesZIndex: 2;
-$paginationsZIndex: 3;
-$arrowsZIndex: 4;
+$activeZIndex: 3;
+$paginationsZIndex: 10;
+$arrowsZIndex: 11;
 
 // if javascript is available，
 // it will replace none to block;
@@ -97,56 +106,83 @@ $arrowsZIndex: 4;
 }
 
 #slides {
-    position: relative;
-    height: 400px;
-    padding: 0px;
-    margin: 0px;
-    list-style-type: none;
+  position: relative;
+  height: 400px;
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
 }
 
 .slide {
-    opacity: 0;
+  overflow: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: #333;
+
+  color: #fff;
+  font-size: 40px;
+
+  transition: opacity 1s ease-out;
+
+  cursor: pointer;
+  z-index: $slidesZIndex;
+  
+  &.active {
+    opacity: 1;
+    z-index: $activeZIndex;
+  }
+
+  &:hover img {
+    transform: scale(1.05, 1.05);
+  }
+
+  &:after {
+    content: '';
     position: absolute;
-    left: 0;
     top: 0;
-    padding: 40px;
+    left: 0;
     width: 100%;
     height: 100%;
-
-    background-color: #333;
-    background-size: cover;
-
-    transition: opacity 1s ease-out;
-
-    cursor: pointer;
-
-    z-index: $slidesZIndex;
-    &.active {
-        opacity: 1;
-    }
+  }
 }
 
 .slide {
-    color: #fff;
-    font-size: 40px;
+  img {
+    width: 100%;
+    height: 100%;
+    
+    transition: all, .8s;
+  }
 }
 
 .prev,
 .next {
   position: absolute;
   top: 50%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  font-size: 36px;
-  color: #d3d3d3;
+  width: 50px;
+  height: 50px;
 
   transform: translateY(-50%);
   z-index: $arrowsZIndex;
-
   cursor: pointer;
+  svg { transition: all, .3s; }
+  &:hover {
+    svg { stroke: #adadad; }
+  }
 }
 
-.prev { left: 30px; }
-.next { right: 30px; }
+.prev { left: 3.4375rem; }
+.next { right: 3.4375rem; }
 
 .paginations {
   position: absolute;
@@ -177,6 +213,26 @@ $arrowsZIndex: 4;
       background-color: #fff;
     }
   }
+}
+
+@media screen and (min-width: 1401px) {
+  .slide:after { box-shadow: 8.23em 0 8.23em 20px rgba(0, 0, 0, 0.8) inset, -8.23em 0 8.23em 20px rgba(0, 0, 0, 0.8) inset; }
+}
+
+@media screen and (min-width: 1171px) and (max-width: 1400px) {
+  .slide:after { box-shadow: 7.23em 0 7.23em 20px rgba(0, 0, 0, 0.8) inset, -7.23em 0 7.23em 20px rgba(0, 0, 0, 0.8) inset; }
+}
+
+@media screen and (min-width: 931px) and (max-width: 1170px) {
+  .slide:after { box-shadow: 6.23em 0 6.23em 20px rgba(0, 0, 0, 0.8) inset; }
+}
+
+@media screen and (min-width: 768px) and (max-width: 930px) {
+  .slide:after { box-shadow: 5.23em 0 5.23em 20px rgba(0, 0, 0, 0.8) inset; }
+}
+
+@media screen and (max-width: 767px) {
+  .slide:after { box-shadow: 4.23em 0 4.23em 20px rgba(0, 0, 0, 0.8) inset; }
 }
 
 </style>
