@@ -197,7 +197,7 @@ $arrowsZIndex: 11;
     text-align: right;
     transform: translate(0, -50%);
     z-index: 1;
-    font-weight: 100;
+    font-weight: 300;
     &__title { font-size: 32px; }
     &__word { 
       font-size: 55px; 
