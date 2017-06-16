@@ -63,7 +63,6 @@
       imgs: {
         type: Array,
         required: true,
-        default() { return []; },
       },
       seconds: {
         type: Number,
@@ -77,18 +76,24 @@
         timer: null,
       };
     },
-    mounted() {
-      this.init();
-      this.paginations = this.imgs.length;
+    mounted() {},
+    watch: {
+      imgs() {
+        this.init();
+        this.paginations = this.imgs.length;
+      },
     },
     methods: {
       currentSlide(val) {
         return val === this.currentIndex;
       },
       init() {
-        this.$el.style.display = 'block';
-        this.slides = this.$el.querySelectorAll('#slides .slide');
-        this.timer = setInterval(this.nextSlideshow, this.seconds);
+        // this.$el.style.display = 'block';
+
+        this.$nextTick(() => {
+          this.slides = this.$el.querySelectorAll('#slides .slide');
+          this.timer = setInterval(this.nextSlideshow, this.seconds);
+        });
       },
       pauseSlideshow() {
         clearInterval(this.timer);
@@ -119,7 +124,7 @@ $paginationsZIndex: 10;
 $arrowsZIndex: 11;
 
 .slideshow {
-  display: none;
+  // display: none;
   position: relative;
   height: auto;
 
@@ -278,25 +283,5 @@ $arrowsZIndex: 11;
     }
   }
 }
-
-// @media screen and (min-width: 1401px) {
-//   .slide:after { box-shadow: 8.23em 0 8.23em 20px rgba(0, 0, 0, 0.8) inset, -8.23em 0 8.23em 20px rgba(0, 0, 0, 0.8) inset; }
-// }
-
-// @media screen and (min-width: 1171px) and (max-width: 1400px) {
-//   .slide:after { box-shadow: 7.23em 0 7.23em 20px rgba(0, 0, 0, 0.8) inset, -7.23em 0 7.23em 20px rgba(0, 0, 0, 0.8) inset; }
-// }
-
-// @media screen and (min-width: 931px) and (max-width: 1170px) {
-//   .slide:after { box-shadow: 6.23em 0 6.23em 20px rgba(0, 0, 0, 0.8) inset; }
-// }
-
-// @media screen and (min-width: 768px) and (max-width: 930px) {
-//   .slide:after { box-shadow: 5.23em 0 5.23em 20px rgba(0, 0, 0, 0.8) inset; }
-// }
-
-// @media screen and (max-width: 767px) {
-//   .slide:after { box-shadow: 4.23em 0 4.23em 20px rgba(0, 0, 0, 0.8) inset; }
-// }
 
 </style>
