@@ -10,7 +10,7 @@
           :href="img.href">
             <div class="slide_content">
               <div class="slide_content__title">{{ img.name }}</div>
-              <div class="slide_content__word">{{ img.word }}<span>觀看數</span></div>
+              <div class="slide_content__word">{{ img.word }}</div>
               <div class="slide_content__meta"> {{ `${img.client} ${img.category}` }} </div>
               <div class="slide_content__action">
                 <svg width="82px" height="68px" viewBox="0 0 82 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -88,8 +88,6 @@
         return val === this.currentIndex;
       },
       init() {
-        // this.$el.style.display = 'block';
-
         this.$nextTick(() => {
           this.slides = this.$el.querySelectorAll('#slides .slide');
           this.timer = setInterval(this.nextSlideshow, this.seconds);
@@ -124,7 +122,6 @@ $paginationsZIndex: 10;
 $arrowsZIndex: 11;
 
 .slideshow {
-  // display: none;
   position: relative;
   height: auto;
 
@@ -206,10 +203,6 @@ $arrowsZIndex: 11;
     &__title { font-size: 36px; }
     &__word { 
       font-size: 55px; 
-      span {
-        margin-left: 10px;
-        font-size: 20px;
-      }
     }
     &__meta { font-size: 20px; }
     &__action {
