@@ -10,7 +10,7 @@
           :href="img.href">
             <div class="slide_content">
               <div class="slide_content__title">{{ img.name }}</div>
-              <div class="slide_content__word">{{ img.word }}</div>
+              <div class="slide_content__word">{{ img.word }} <span v-if="!img.showDescription"> 觀看數 </span></div>
               <div class="slide_content__meta"> {{ `${img.client} ${img.category}` }} </div>
               <div class="slide_content__action">
                 <svg width="82px" height="68px" viewBox="0 0 82 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -203,6 +203,7 @@ $arrowsZIndex: 11;
     &__title { font-size: 36px; }
     &__word { 
       font-size: 55px; 
+      span { font-size: 36px; }
     }
     &__meta { font-size: 20px; }
     &__action {
