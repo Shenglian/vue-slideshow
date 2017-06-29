@@ -612,6 +612,3 @@ $arrowsZIndex: 11;
 }
 
 </style>
-
-
-</style>
