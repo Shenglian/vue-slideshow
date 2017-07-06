@@ -10,7 +10,7 @@
           :href="img.href">
             <div class="slide_content">
               <div class="slide_content__title">{{ img.name }}</div>
-              <div class="slide_content__word">{{ img.word }} <span v-if="!img.showDescription"> 觀看數 </span></div>
+              <div class="slide_content__word">{{ img.word }} <span v-if="!img.showDescription"> 熱烈觀看中 </span></div>
               <div class="slide_content__meta"> {{ `${img.client} ${img.category}` }} </div>
               <div class="slide_content__action">
                 <svg width="82px" height="68px" viewBox="0 0 82 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -201,9 +201,9 @@ $arrowsZIndex: 11;
     z-index: 1;
     font-weight: 300;
     &__title { font-size: 36px; }
-    &__word { 
-      font-size: 55px; 
-      span { font-size: 36px; }
+    &__word {
+      margin-bottom: 10px; 
+      span { font-size: 30px; }
     }
     &__meta { font-size: 20px; }
     &__action {
@@ -312,19 +312,23 @@ $arrowsZIndex: 11;
     right: 0.8rem;
   }
 
-  .slide_content {
-    top: 95%;
-    left: 0;
-    right: 10px;
-    transform: translate(0, -100%);
-    &__title { font-size: 14px; }
-    &__word { 
-      font-size: 20px; 
-      span { font-size: 18px; }
+  .slide {
+    .slide_content {
+      top: 95%;
+      left: 0;
+      right: 10px;
+      transform: translate(0, -100%);
+      &__title { font-size: 14px; }
+      &__word { 
+        font-size: 20px; 
+        margin-bottom: 0;
+        span { font-size: 18px; }
+      }
+      &__meta { display: none; }
+      &__action { display: none; }
     }
-    &__meta { display: none; }
-    &__action { display: none; }
   }
+  
 }
 
 </style>
