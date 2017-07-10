@@ -281,7 +281,8 @@ $arrowsZIndex: 11;
 @media screen and (max-width: 768px) {
 
   #slides {
-    height: 200px;
+    height: 0;
+    padding-bottom: 40%;
   }
 
   .slide:before,
