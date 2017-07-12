@@ -178,7 +178,7 @@ $arrowsZIndex: 11;
     content: '';
     position: absolute;
     top: 0;
-    left: 35%;
+    left: 60%;
     right: 0;
     bottom: 0;
     background: -webkit-linear-gradient(right,#000 0,#000 50%,transparent 100%);
